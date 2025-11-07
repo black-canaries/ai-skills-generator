@@ -1,0 +1,33 @@
+{
+  "name": "ai-skills-generator",
+  "version": "1.0.0",
+  "description": "CLI tool to generate Claude agent skills and Cursor project rules from pre-made templates",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "ai-skills": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude",
+    "cursor",
+    "ai",
+    "skills",
+    "rules",
+    "generator",
+    "cli",
+    "templates"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "inquirer": "^11.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
