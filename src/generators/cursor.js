@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { getCursorTemplate } from '../templates/cursor/index.js';
+import { addToManifest } from '../manifest.js';
 
 export async function generateCursorRules(skills, targetDir = process.cwd()) {
   const rulesDir = path.join(targetDir, '.cursor', 'rules');
@@ -21,6 +22,9 @@ export async function generateCursorRules(skills, targetDir = process.cwd()) {
     fs.writeFileSync(ruleFilePath, template);
     createdFiles.push(ruleFilePath);
   }
+
+  // Update manifest
+  addToManifest('cursor', skills, targetDir);
 
   return createdFiles;
 }

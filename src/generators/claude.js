@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { getClaudeTemplate } from '../templates/claude/index.js';
+import { addToManifest } from '../manifest.js';
 
 export async function generateClaudeSkills(skills, targetDir = process.cwd()) {
   const skillsDir = path.join(targetDir, '.claude', 'skills');
@@ -28,6 +29,9 @@ export async function generateClaudeSkills(skills, targetDir = process.cwd()) {
     fs.writeFileSync(skillFilePath, template);
     createdFiles.push(skillFilePath);
   }
+
+  // Update manifest
+  addToManifest('claude', skills, targetDir);
 
   return createdFiles;
 }

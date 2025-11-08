@@ -4,8 +4,16 @@ A powerful CLI tool to generate [Claude Agent Skills](https://docs.claude.com/en
 
 ## Features
 
+### Core Functionality
 - 🤖 Generate **Claude Agent Skills** for Claude Code
 - 🎯 Generate **Cursor Project Rules** for Cursor IDE
+- 🔄 **Update existing skills** to latest template versions
+- 🔁 **Reset individual skills** (delete and regenerate)
+- 🗑️ **Reset all skills** (clean slate)
+- 📋 **List generated skills** with creation/update timestamps
+- 💾 **Automatic tracking** with .aiskills.json manifest
+
+### Templates
 - 📦 **9 Technology Templates** based on 2025 best practices:
   - JavaScript (ES2024+)
   - TypeScript (Strict Mode)
@@ -16,8 +24,12 @@ A powerful CLI tool to generate [Claude Agent Skills](https://docs.claude.com/en
   - Vite 6 (Build Tool)
   - React Native (New Architecture)
   - Expo SDK 54+ (Development Builds & Expo Router)
+
+### Developer Experience
 - 🎨 Interactive CLI with multi-select support
-- ✅ TypeScript support
+- 🎯 Context-aware menu (shows update/reset only when applicable)
+- ⚠️ Safe operations with confirmation prompts
+- 📊 Detailed progress and success messages
 - 🚀 Production-ready templates
 
 ## Installation
@@ -65,10 +77,25 @@ The CLI will guide you through three simple steps:
 2. **Select Skills**: Choose which technology templates to generate
 3. **Confirm**: Review and confirm your selections
 
-### Example Session
+### Main Menu
+
+The CLI now features an interactive main menu with the following options:
+
+- **➕ Generate new skills/rules** - Create new skills/rules from templates
+- **🔄 Update existing skills/rules** - Update existing skills to latest templates
+- **🔁 Reset specific skill/rule** - Delete and regenerate a specific skill/rule
+- **🗑️ Reset all skills/rules** - Delete all generated skills/rules
+- **📋 List generated skills/rules** - View all generated skills with timestamps
+- **❌ Exit** - Exit the CLI
+
+### Example Session: Generate
 
 ```
 🚀 Welcome to AI Skills Generator!
+
+? What would you like to do? (Use arrow keys)
+❯ ➕ Generate new skills/rules
+  ❌ Exit
 
 ? Which platform would you like to generate for? (Use arrow keys)
 ❯ Claude Agent Skills
@@ -99,6 +126,51 @@ Created files:
   - /path/to/project/.claude/skills/javascript/SKILL.md
   - /path/to/project/.claude/skills/typescript/SKILL.md
   - /path/to/project/.claude/skills/react/SKILL.md
+```
+
+### Example Session: Update
+
+```
+? What would you like to do?
+❯ 🔄 Update existing skills/rules
+
+? Select skills/rules to update:
+❯ ◉ 🤖 typescript (claude)
+  ◉ 🎯 react (cursor)
+
+? This will overwrite existing files. Continue? (y/N)
+
+🔄 Updating skills/rules...
+
+Updating Claude Agent Skills...
+✓ Updated 1 Claude skill(s)
+
+Updating Cursor Project Rules...
+✓ Updated 1 Cursor rule(s)
+
+✨ Update complete!
+```
+
+### Example Session: List
+
+```
+? What would you like to do?
+❯ 📋 List generated skills/rules
+
+📋 Generated Skills/Rules:
+
+🤖 Claude Agent Skills:
+   • TypeScript
+     Created: Nov 8, 2025, 10:30 AM
+     Updated: Nov 8, 2025, 11:15 AM
+   • React
+     Created: Nov 8, 2025, 10:30 AM
+
+🎯 Cursor Project Rules:
+   • Next.js
+     Created: Nov 8, 2025, 10:30 AM
+
+Total: 3 skill(s)/rule(s)
 ```
 
 ## Generated Structure
@@ -139,6 +211,39 @@ Each rule file is an `.mdc` file with:
 - Project-specific coding standards
 - Technology-specific best practices
 - Common patterns to follow
+
+### Manifest File
+
+The CLI automatically creates a `.aiskills.json` manifest file to track generated skills:
+
+```json
+{
+  "version": "1.0.0",
+  "generated": [
+    {
+      "platform": "claude",
+      "skill": "typescript",
+      "createdAt": "2025-11-08T10:30:00.000Z",
+      "updatedAt": "2025-11-08T11:15:00.000Z"
+    },
+    {
+      "platform": "cursor",
+      "skill": "react",
+      "createdAt": "2025-11-08T10:30:00.000Z",
+      "updatedAt": "2025-11-08T10:30:00.000Z"
+    }
+  ],
+  "lastUpdated": "2025-11-08T11:15:00.000Z"
+}
+```
+
+This manifest enables:
+- Tracking what skills have been generated
+- Showing update/reset options only when applicable
+- Displaying creation and update timestamps
+- Managing skill lifecycle
+
+**Note:** Add `.aiskills.json` to your `.gitignore` if you don't want to commit it.
 
 ## Available Templates
 

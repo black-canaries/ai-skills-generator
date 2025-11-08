@@ -12,3 +12,8 @@ yarn-error.log*
 .idea/
 dist/
 build/
+
+# Generated skills and rules (for testing)
+.claude/
+.cursor/
+.aiskills.json
